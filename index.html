@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Know Your Sprit Animal</title><link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/favicon_io/site.webmanifest">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        img {
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <img id="imG" src="https://imgix.ranker.com/list_img_v2/17011/2837011/original/animals-being-dumb?fit=crop&fm=pjpg&q=80&dpr=2&w=1200&h=720" alt="sup">
+</body>
+<script>
+    let start_num = 1;
+    let end_num = 21;
+    random_img_no = Math.floor(Math.random() * (end_num - start_num + 1)) + start_num;
+    let imgTag = document.getElementById("imG");
+    imgTag.src = `/animals/${random_img_no}.jpg`;
+</script>
+</html>
