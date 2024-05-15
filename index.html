@@ -24,13 +24,13 @@
     </style>
 </head>
 <body>
-    <img id="imG" src="https://imgix.ranker.com/list_img_v2/17011/2837011/original/animals-being-dumb?fit=crop&fm=pjpg&q=80&dpr=2&w=1200&h=720" alt="sup">
+    <img id="imG" src="https://imgix.ranker.com/list_img_v2/17011/2837011/original/animals-being-dumb?fit=crop&fm=pjpg&q=80&dpr=2&w=1200&h=720" alt="Oops! Please try again later">
 </body>
 <script>
     let start_num = 1;
     let end_num = 21;
     random_img_no = Math.floor(Math.random() * (end_num - start_num + 1)) + start_num;
     let imgTag = document.getElementById("imG");
-    imgTag.src = `/animals/${random_img_no}.jpg`;
+    imgTag.src = `./animals/${random_img_no}.jpg`;
 </script>
 </html>
