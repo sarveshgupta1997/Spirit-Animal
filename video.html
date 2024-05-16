@@ -44,10 +44,16 @@
   </div>
 </body>
 <script>
-window.onload = function() {
+const myTimeout = setTimeout(play, 3000);
+
+  function play() {
     var video = document.getElementById('bg-video');
     video.play();
   };
+// window.onload = function() {
+//     var video = document.getElementById('bg-video');
+//     video.play();
+//   };
   
 </script>
 </html>
