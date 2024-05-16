@@ -36,7 +36,7 @@
     </style>
 </head>
 <body>
-  <div class="video-container">
+  <div class="video-container" >
     <video id="bg-video" controls>
       <source src="./videos/macchar_hijda.mp4" type="video/mp4">
       Your browser does not support the video tag.
@@ -44,12 +44,18 @@
   </div>
 </body>
 <script>
-const myTimeout = setTimeout(play, 3000);
 
-  function play() {
-    var video = document.getElementById('bg-video');
-    video.play();
-  };
+let start_num = 1;
+    let end_num = 2;
+    random_vid_no = Math.floor(Math.random() * (end_num - start_num + 1)) + start_num;
+    var videoTag = document.getElementById('bg-video');
+    videoTag.src = `./videos/${random_vid_no}.mp4`;
+// const myTimeout = setTimeout(play, 3000);
+
+//   function play() {
+//     var video = document.getElementById('bg-video');
+//     video.play();
+//   };
 // window.onload = function() {
 //     var video = document.getElementById('bg-video');
 //     video.play();
