@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Joke Generator</title><link rel="apple-touch-icon" sizes="180x180" href="./favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="./favicon_io/site.webmanifest">
+    
+    <style>
+/* General styles */
+body {
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #fa7a47, #ffaa88);
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.container {
+  text-align: center;
+  margin: auto;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease-in-out;
+  transform: scale(0.8);
+  animation: scaleUp 0.5s forwards;
+}
+
+@keyframes scaleUp {
+  to {
+    transform: scale(1);
+  }
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 15px 30px;
+  margin: 10px;
+  border: none;
+  background: linear-gradient(135deg, #ffffff, #ffffff);
+  color: white;
+  font-size: 1.2rem;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(255, 64, 129, 0.5);
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 25px rgba(255, 64, 129, 0.7);
+}
+
+.joke {
+  margin: 30px 0;
+  color: #fff;
+  font-size: 1.5rem;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.joke p {
+  margin: 10px 0;
+}
+
+#jokeButton {
+  margin: auto;
+  display: none;
+}
+
+    </style>
+</head>
+<body>
+  <div class="container" id="content">
+    <h1>What are you?</h1>
+    <button onclick="handleUserRole('developer')">Developer</button>
+    <button onclick="handleUserRole('tester')">Tester</button>
+    <button onclick="handleUserRole('management')">Management Team</button>
+    <button onclick="handleUserRole('devops')">DevOps</button>
+    <button onclick="handleUserRole('none')">None of the above</button>
+  </div>
+    <script>
+const jokes = {
+  developer: [
+  {
+          "Question": "Why do programmers prefer dark mode?",
+          "Answer": "Because light attracts bugs."
+        },
+        {
+          "Question": "Why do Java developers wear glasses?",
+          "Answer": "Because they don’t C#."
+        },
+        {
+          "Question": "Why did the programmer quit his job?",
+          "Answer": "Because he didn't get arrays."
+        },
+        {
+          "Question": "Why do programmers hate nature?",
+          "Answer": "It has too many bugs."
+        },
+        {
+          "Question": "Why did the programmer go broke?",
+          "Answer": "Because he used up all his cache."
+        },
+        {
+          "Question": "How do you comfort a JavaScript bug?",
+          "Answer": "You console it."
+        },
+        {
+          "Question": "Why was the developer unhappy at their job?",
+          "Answer": "They wanted arrays."
+        },
+        {
+          "Question": "Why don’t bachelors like Git?",
+          "Answer": "Because they are afraid to commit."
+        },
+        {
+          "Question": "Why was the function sad after a successful first call?",
+          "Answer": "It didn’t get a callback."
+        },
+        {
+          "Question": "Why did the UX designer leave the party early?",
+          "Answer": "Because they couldn’t find the user-friendly interface."
+        },
+        {
+          "Question": "Why did the database administrator leave his wife?",
+          "Answer": "She had one-to-many relationships."
+        },
+        {
+          "Question": "Why do developers hate writing documentation?",
+          "Answer": "Because they're used to writing code that only they can understand."
+        },
+        {
+          "Question": "What’s a developer's favorite animal?",
+          "Answer": "A Python."
+        },
+        {
+          "Question": "Why was the developer’s calendar always full?",
+          "Answer": "Because they had too many class files."
+        },
+        {
+          "Question": "Why did the function go to therapy?",
+          "Answer": "Because it had too many arguments."
+        },
+  ],
+  tester: [
+  { "Question": "Why was the tester always calm?", "Answer": "Because he knew how to handle the stress." },
+{ "Question": "Why do testers never get married?", "Answer": "Because they always find faults." },
+{ "Question": "Why did the tester go broke?", "Answer": "Because he kept paying for bugs." },
+{ "Question": "How many testers does it take to change a lightbulb?", "Answer": "None, they just find darkness." },
+{ "Question": "Why did the tester refuse to play cards?", "Answer": "Because he always suspected a flush." },
+{ "Question": "Why don't testers believe in ghosts?", "Answer": "Because they can't reproduce the error." },
+{ "Question": "Why was the tester always late?", "Answer": "Because he was still debugging the alarm clock." },
+{ "Question": "Why did the tester bring a ladder to work?", "Answer": "To reach the high standards." },
+{ "Question": "Why did the tester open a bakery?", "Answer": "To catch more bugs." },
+{ "Question": "Why did the tester break up with his calculator?", "Answer": "Because it couldn't handle irrational numbers." },
+  ],
+  management: [
+  { "Question": "How do you know a manager is lying?", "Answer": "His lips are moving." },
+{ "Question": "Why did the manager cross the road?", "Answer": "To delegate the task." },
+{ "Question": "Why did the manager bring a ladder to the office?", "Answer": "To climb the corporate ladder." },
+{ "Question": "Why did the manager buy a parachute?", "Answer": "For when the business takes a nosedive." },
+{ "Question": "Why did the manager get into gardening?", "Answer": "To grow the company organically." },
+{ "Question": "Why did the manager become a musician?", "Answer": "To conduct business." },
+{ "Question": "Why did the manager get a pet snake?", "Answer": "To learn how to handle slippery situations." },
+{ "Question": "Why don't managers play hide and seek?", "Answer": "Because good luck hiding from responsibilities." },
+{ "Question": "Why did the manager start learning to juggle?", "Answer": "To manage multiple tasks at once." },
+{ "Question": "Why did the manager bring a map to work?", "Answer": "To navigate through all the office politics." },
+  ],
+  devops: [
+  { "Question": "Why do DevOps engineers love nature?", "Answer": "Because it’s full of logs." },
+{ "Question": "What’s a DevOps engineer’s favorite dish?", "Answer": "Continuous delivery." },
+{ "Question": "Why did the DevOps engineer bring a broom to work?", "Answer": "To sweep away the old processes." },
+{ "Question": "Why don't DevOps engineers play hide and seek?", "Answer": "Because good luck hiding from automation." },
+{ "Question": "Why did the DevOps engineer become a chef?", "Answer": "To script perfect recipes." },
+{ "Question": "Why did the DevOps engineer get a tattoo of a server?", "Answer": "To show their commitment to uptime." },
+{ "Question": "Why did the DevOps engineer go to the beach?", "Answer": "To find shell scripts." },
+{ "Question": "Why did the DevOps engineer buy a plant?", "Answer": "To practice scaling." },
+{ "Question": "Why did the DevOps engineer start gardening?", "Answer": "To cultivate a robust infrastructure." },
+{ "Question": "Why did the DevOps engineer join the circus?", "Answer": "To automate the clown car." },
+  ]
+};
+
+function getRandomJoke(role) {
+  const randomIndex = Math.floor(Math.random() * jokes[role].length);
+  return jokes[role][randomIndex];
+}
+
+function handleUserRole(role) {
+  const contentDiv = document.getElementById('content');
+  contentDiv.innerHTML = '';
+
+  if (role === 'none') {
+    contentDiv.innerHTML = `<img src="./images/old_man.png" alt="Non-developer image" style="border-radius: 15px; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);">`;
+  } else {
+    const joke = getRandomJoke(role);
+    contentDiv.innerHTML = `
+      <div class="joke">
+        <p><strong>Question:</strong> ${joke.Question}</p>
+        <p><strong>Answer:</strong> ${joke.Answer}</p>
+      </div>
+      <button id="jokeButton" onclick="showRandomJoke('${role}')">Get Random Joke</button>
+    `;
+    document.getElementById('jokeButton').style.display = 'block';
+  }
+}
+
+function showRandomJoke(role) {
+  const joke = getRandomJoke(role);
+  const jokeDiv = document.querySelector('.joke');
+  jokeDiv.innerHTML = `
+    <p><strong>Question:</strong> ${joke.Question}</p>
+    <p><strong>Answer:</strong> ${joke.Answer}</p>
+  `;
+}
+
+    </script>
+</body>
+</html>
+
