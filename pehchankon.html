@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Know Your Colleague</title>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./favicon_io/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./favicon_io/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./favicon_io/favicon-16x16.png"
+    />
+    <link rel="manifest" href="./favicon_io/site.webmanifest" />
+    <style>
+      /* body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        img {
+            height: 100%;
+            object-fit: cover;
+        } */
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background: linear-gradient(45deg, #83a4d4, #b6fbff);
+      }
+
+      .container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        width: 100%;
+        text-align: center;
+      }
+
+      #employee-details {
+        display: none;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      h1 {
+        color: #333;
+      }
+
+      p {
+        color: #666;
+        margin: 5px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="employee-details">
+        <h1 id="name"></h1>
+        <p><strong>Designation:</strong> <span id="designation"></span></p>
+        <p><strong>ID:</strong> <span id="id"></span></p>
+        <p><strong>Email Id:</strong> <span id="email"></span></p>
+        <p><strong>Client Site:</strong> <span id="client-site"></span></p>
+        <p><strong>Reporting To:</strong> <span id="reporting-to"></span></p>
+      </div>
+      <div id="error-message" class="hidden">
+        <h1>Employee not found</h1>
+      </div>
+    </div>
+  </body>
+  <script>
+    // Sample employee data array
+    const employees = [
+      {
+        name: "Shrey Sharma",
+        designation: "Software Developer",
+        id: "A004391",
+        email: "shrey.sharma@cipl.org.in",
+        clientSite: "UPSC - Revamp of Portal",
+        reportingTo: "Maninder Singh Bhalla",
+      },
+      // Add more employee objects as needed
+    ];
+
+    // Function to get query parameter from URL
+    function getQueryParameter(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+
+    // Function to display employee details
+    function displayEmployeeDetails(employeeName) {
+      const employee = employees.find(
+        (emp) => emp.name.toLowerCase() === employeeName.toLowerCase()
+      );
+      if (employee) {
+        document.getElementById("name").innerText = employee.name;
+        document.getElementById("designation").innerText = employee.designation;
+        document.getElementById("id").innerText = employee.id;
+        document.getElementById("email").innerText = employee.email;
+        document.getElementById("client-site").innerText = employee.clientSite;
+        document.getElementById("reporting-to").innerText =
+          employee.reportingTo;
+        document.getElementById("employee-details").style.display = "block";
+      } else {
+        document.getElementById("error-message").classList.remove("hidden");
+      }
+    }
+
+    // Get employee name from URL and display details
+    const employeeName = getQueryParameter("employeeName");
+    if (employeeName) {
+      displayEmployeeDetails(employeeName);
+    } else {
+      document.getElementById("error-message").classList.remove("hidden");
+    }
+  </script>
+</html>
